@@ -1,11 +1,11 @@
 (function () {
-	var _xdm = _xdm || [];
-	_xdm.push(['_setAccount', 'your_project_name']);
-	var _sdr = {};
-    _sdr.st = new Date().getTime();
-    _sdr.getParams = function(e){
+	var _p = _p || [];
+	_p.push(['_setAccount', 'your_project_name']);
+	var _x = {};
+        _x.st = new Date().getTime();
+        _x.getParams = function(e){
     	var params = {};
-    	params.st=_sdr.st;
+    	params.st=_x.st;
 		if(document) {
 			params.domain = document.domain || '';  
 			var tmp = (document.URL || '').split('?');
@@ -25,17 +25,17 @@
 		if(e){
 			params.event = e.type;
 			if(e.type ==='unload'){
-				params.timespent = new Date().getTime() - _sdr.st;
-				_sdr.st=0; 
+				params.timespent = new Date().getTime() - _x.st;
+				_x.st=0; 
 			}else{
 				params.timespent='';
 			}
 		}
-		if(_xdm) {
-			for(var i in _xdm) {
-				switch(_xdm[i][0]) {
+		if(_p) {
+			for(var i in _p) {
+				switch(_p[i][0]) {
 					case '_setAccount':
-						params.account = _xdm[i][1];
+						params.account = _p[i][1];
 						break;
 					default:
 						break;
@@ -53,13 +53,13 @@
     }
 
     window.addEventListener('load',function(e){
-		var args = _sdr.getParams(e);
+		var args = _x.getParams(e);
 		var img = new Image(1, 1); 
 		img.src = 'http://server:port/1.gif?' + args;
 	})
 
 	window.addEventListener('unload',function(e){
-		var args = _sdr.getParams(e);
+		var args = _x.getParams(e);
 		var img = new Image(1, 1); 
 		img.src = 'http://server:port/1.gif?' + args;
 	})
